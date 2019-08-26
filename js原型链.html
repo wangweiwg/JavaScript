@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS原型链</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 只有函数有prototype属性
+		let a = {};
+		let b = function () {};
+		console.log(a.prototype);
+		console.log(b.prototype);
+		// Object.prototype怎么解释？
+		// 其实Object是一个全局的对象，也是一个构造函数，以及其他类型的全局对象也都是构造函数：
+		
+		function outTypeName(data, type) {
+			let typeName = Object.prototype.toString.call(data);
+			console.log(typeName);
+		}
+		outTypeName(Object)
+		outTypeName(String)
+		outTypeName(Number)
+
+		// 为什么只要函数有prototype属性
+		// JS通过new来生成对象，但是仅靠构造函数，每次生成的对象都不一样
+		// 有时候需要在两个对象之间共享属性，由于JS在设计之初没有类的概念，所以JS使用函数的prototype来处理这部分需要被共享的属性，通过函数prototype来模拟类：
+		// 当创建一个函数时，JS会自动为函数添加prototype属性，值是一个有constructor的对象
+		// 以下是共享属性prototype的例子：
+		function People(name) {
+			this.name = name;
+		}
+		People.prototype.age = 23;
+		// 创建实例
+		let people1 = new People('张三');
+		let people2 = new People('李四');
+		People.prototype.age = 24;
+		console.log(people1.age, people2.age);
+		console.log(people1.__proto__ == People.prototype)
+		// 原因是：people1和people2的原型是People.prototype
+		// 原型链：
+		// __proto__和Object.getPrototypeOf(target):对象的原型
+		// __proto__ 是对象实例和它的构造函数之间建立的，它的值是：构造函数的 prototype
+		// 也就是说：__proto__的值是它所对应的原型对象，是某个函数的prototype
+	</script>
+</body>
+</html>
