@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+#header {
+  width: 60px;
+  height: 30px;
+  background-color: yellowgreen;
+  white-space: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

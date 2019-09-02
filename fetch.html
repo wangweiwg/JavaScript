@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>与时俱进的fetch PK Ajax</title>
+</head>
+<body>
+	<button id="getData">fetch请求</button>
+</body>
+<script type="text/javascript">
+	var url1 = 'https://test-business-rest.01zhuanche.com/api/v1/common/query/internationalCode'
+	var url2 = 'https://test-business-rest.01zhuanche.com/api/v1/common/cityAll'
+	document.getElementById('getData').onclick = function () {
+		fetch(url2).then(function (response) {
+			if (response.status == 200) {
+				return response.json()
+			} else {
+				console.log('状态码是--', response.status)
+			}
+		}).then(function (result) {
+			if (result.code == 0) {
+				console.log('获取到的数据是----', result.data)
+			}
+		}).catch(function (error) {
+			console.log('捕获到异常存在', error)
+		})
+	}
+</script>
+</html>
